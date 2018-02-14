@@ -47,6 +47,7 @@ public class DriveTrainSubCommand extends Command {
     protected void execute() {
     	if(ActivateButtonCommand.isActive) {
     		double left  = -Robot.oi.gPad.getRawAxis(1);
+    		double x = Robot.oi.gPad.getRawAxis(2);
     		double right = -Robot.oi.gPad.getRawAxis(3);
     		if(Math.abs(left) < 0.15) {
     			left = 0;
@@ -56,6 +57,7 @@ public class DriveTrainSubCommand extends Command {
     		}
     		double power = (-Robot.oi.joy.getRawAxis(2) + 1) / 2;
     		Robot.driveTrain.tankDrive(left * power, right * power);
+    		// Robot.driveTrain.arcadeDrive(right, x);
     		SmartDashboard.putNumber("Power Multiplier", power);
     		
     	}
