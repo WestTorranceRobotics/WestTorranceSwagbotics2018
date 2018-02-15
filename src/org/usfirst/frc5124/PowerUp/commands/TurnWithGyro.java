@@ -21,8 +21,21 @@ import org.usfirst.frc5124.PowerUp.RobotMap;
  */
 public class TurnWithGyro extends Command {
 	
-    public TurnWithGyro(double inches, double speed) {
-    	
+	private double target;
+	private double initialPos;
+	private double power;
+	private boolean isFinished;
+	private boolean wasGreaterThan;
+	
+    public TurnWithGyro(double degrees, double power) {
+    	initialPos = Robot.driveTrain.getGyroAngle();
+    	this.power = power;
+    	this.target = degrees + initialPos;
+    	isFinished = false;
+    	wasGreaterThan = degrees > 0;
+    	if(degrees == Robot.driveTrain.getGyroAngle()) {
+    		isFinished = true;
+    	}
     }
 
     // Called just before this Command runs the first time
@@ -34,12 +47,18 @@ public class TurnWithGyro extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    	if(wasGreaterThan ? Robot.driveTrain.getGyroAngle() < target : Robot.driveTrain.getGyroAngle() > target) {
+    		Robot.driveTrain.arcadeDrive(0, wasGreaterThan ? 1 : -1);
+    	}
+    	else {
+    		isFinished = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return isFinished;
     }
 
     // Called once after isFinished returns true

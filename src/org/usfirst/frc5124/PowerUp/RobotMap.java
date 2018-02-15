@@ -125,7 +125,7 @@ public class RobotMap {
 
         liftPID.setOutputRange(-1.0, 1.0);
         liftLimitSwitchBottom = new DigitalInput(4);
-        intakeFoldingMotor = new VictorSP(0);
+        intakeFoldingMotor = new VictorSP(2);
         SmartDashboard.putData("Intake FoldingMotor", (VictorSP) intakeFoldingMotor);
         intakeFoldingMotor.setInverted(false);
         intakeFoldingPotentiometer = new AnalogPotentiometer(0, 1.0,  0.0);
@@ -137,22 +137,23 @@ public class RobotMap {
         intakeFoldingPID.setAbsoluteTolerance(0.2);
 
         intakeFoldingPID.setOutputRange(-1.0, 1.0);
-        intakeIntakeMotorTwo = new VictorSP(2);
+        intakeIntakeMotorTwo = new VictorSP(0);
         SmartDashboard.putData("Intake IntakeMotorTwo", (VictorSP) intakeIntakeMotorTwo);
         intakeIntakeMotorTwo.setInverted(false);
         intakeIntakeMotorOne = new VictorSP(1);
         SmartDashboard.putData("Intake IntakeMotorOne", (VictorSP) intakeIntakeMotorOne);
-        intakeIntakeMotorOne.setInverted(true);
+        intakeIntakeMotorOne.setInverted(false);
         intakeIntakeGroup = new SpeedControllerGroup(intakeIntakeMotorOne, intakeIntakeMotorTwo);
         SmartDashboard.putData("Intake IntakeGroup", intakeIntakeGroup);
         
         intakeCompressor = new Compressor(0);
+        intakeCompressor.setClosedLoopControl(true);
         SmartDashboard.putData("Intake Compressor", intakeCompressor);
         
-        intakeGrabberDoubleSolenoidOne = new DoubleSolenoid(0, 0, 1);
+        intakeGrabberDoubleSolenoidOne = new DoubleSolenoid(1, 2);
         SmartDashboard.putData("Intake GrabberDoubleSolenoidOne", intakeGrabberDoubleSolenoidOne);
         
-        intakeGrabberDoubleSolenoidTwo = new DoubleSolenoid(0, 2, 3);
+        intakeGrabberDoubleSolenoidTwo = new DoubleSolenoid(0, 3);
         SmartDashboard.putData("Intake GrabberDoubleSolenoidTwo", intakeGrabberDoubleSolenoidTwo);
          
         DriveEncoder = new Encoder(0,1, false, EncodingType.k4X);

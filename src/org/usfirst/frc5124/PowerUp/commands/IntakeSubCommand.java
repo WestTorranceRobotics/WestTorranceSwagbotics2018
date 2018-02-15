@@ -69,7 +69,7 @@ public class IntakeSubCommand extends Command {
     		else {
     			Robot.intake.solenoidsReverse();
     		}
-    		Robot.intake.setFoldingPIDSetpoint(Robot.oi.joy.getRawAxis(3));
+    		//Robot.intake.setFoldingPIDSetpoint(Robot.oi.joy.getRawAxis(3));
     		Robot.intake.setFolderPower(Robot.intake.getFoldingPIDResult());
     	}
     	else {
