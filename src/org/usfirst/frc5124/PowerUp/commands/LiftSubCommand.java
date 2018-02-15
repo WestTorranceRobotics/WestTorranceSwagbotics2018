@@ -54,6 +54,16 @@ public class LiftSubCommand extends Command {
     	if(Robot.lift.getBottomLimitSwitch() && Robot.lift.getLiftEncoder() != 0) {
     		Robot.lift.zeroEncoder();
     	}
+    	if(liftKey == DOWN) {
+    		Robot.lift.setLiftPIDSetPoint(0);
+    	}
+    	if(liftKey == UP) {
+    		Robot.lift.setLiftPIDSetPoint(0);
+    	}
+    	if(liftKey == MIDDLE) {
+    		Robot.lift.setLiftPIDSetPoint(0);
+    	}
+    	
     	Robot.lift.setLiftSpeed(Robot.lift.getLiftPIDResult());
     }
 

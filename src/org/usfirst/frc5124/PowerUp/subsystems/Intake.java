@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -42,7 +43,7 @@ public class Intake extends Subsystem {
     private final PIDController foldingPID = RobotMap.intakeFoldingPID;
     private final SpeedController intakeMotorTwo = RobotMap.intakeIntakeMotorTwo;
     private final SpeedController intakeMotorOne = RobotMap.intakeIntakeMotorOne;
-    	private final SpeedControllerGroup intakeGroup = RobotMap.intakeIntakeGroup;
+    private final SpeedControllerGroup intakeGroup = RobotMap.intakeIntakeGroup;
     private final Compressor compressor = RobotMap.intakeCompressor;
     private final DoubleSolenoid grabberDoubleSolenoidOne = RobotMap.intakeGrabberDoubleSolenoidOne;
     private final DoubleSolenoid grabberDoubleSolenoidTwo = RobotMap.intakeGrabberDoubleSolenoidTwo;
@@ -102,10 +103,30 @@ public class Intake extends Subsystem {
     public double getPotentiometerValue() {
     	return foldingPotentiometer.get();
     }
+    
     public void initPIDRange() {
-    	foldingPID.setInputRange(-1, 1);
+    	foldingPID.setInputRange(2.95, 4.65);
     	foldingPID.setOutputRange(-1, 1);
     }
+    
+    public void compressorOn() {
+    	compressor.start();
+    }
+    
+    public void compressorOff() {
+    	compressor.stop();
+    }
+    
+    public void solenoidsForward() {
+    	grabberDoubleSolenoidOne.set(Value.kForward);
+    	grabberDoubleSolenoidTwo.set(Value.kForward);
+    }
+    
+    public void solenoidsReverse() {
+    	grabberDoubleSolenoidOne.set(Value.kReverse);
+    	grabberDoubleSolenoidTwo.set(Value.kReverse);
+    }
+    
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

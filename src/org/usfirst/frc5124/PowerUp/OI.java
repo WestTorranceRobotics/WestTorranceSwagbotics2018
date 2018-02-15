@@ -20,7 +20,9 @@ import org.usfirst.frc5124.PowerUp.subsystems.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * interface to the comm
+ * 
+ * ands and command groups that allow control of the robot.
  */
 public class OI {
     //// CREATING BUTTONS
@@ -57,6 +59,9 @@ public class OI {
     public JoystickButton key;
     public JoystickButton threeSwitchUp;
     public JoystickButton threeSwitchDown;
+    public JoystickButton grabButton;
+    public JoystickButton releaseButton;
+    
     public Joystick gPad;
 
     public JoystickButton intakeButton;
@@ -73,6 +78,11 @@ public class OI {
         key = new JoystickButton(buttons, 5);
         threeSwitchUp   = new JoystickButton(buttons, 9);
         threeSwitchDown = new JoystickButton(buttons, 8);
+        intakeButton = new JoystickButton(buttons, 10);
+        outtakeButton = new JoystickButton(buttons, 11);
+        grabButton = new JoystickButton(buttons, 13);
+        releaseButton = new JoystickButton(buttons, 14);
+        
         
         gPad = new Joystick(2);
         
@@ -80,6 +90,11 @@ public class OI {
         key.whileHeld(new ActivateButtonCommand());
         threeSwitchUp.whileHeld(new LiftTopButtonCommand());
         threeSwitchDown.whileHeld(new LiftBottomButtonCommand());
+        intakeButton.whileHeld(new IntakeButtonCommand());
+        outtakeButton.whileHeld(new OuttakeButtonCommand());
+        grabButton.whenPressed(new GrabButtonCommand());
+        releaseButton.whenPressed(new ReleaseButtonCommand());
+        
         
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
